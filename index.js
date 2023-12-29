@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const readlineSync = require('readline-sync');
+const FileSystem = require('fs');
 
 (async () => {
   // Launch the browser and open a new blank page | Inicie o navegador e abra uma nova página em branco
@@ -36,7 +37,7 @@ const readlineSync = require('readline-sync');
     console.error('Elemento não encontrado:', error);
   }
 
-  const Data = await page.evaluate( ()=>{
+  const Data = await page.evaluate(()=>{
     
     let allElments = document.querySelectorAll('[jscontroller=SC7lYd]');
     arr = [];
@@ -56,10 +57,30 @@ const readlineSync = require('readline-sync');
 
   //Let the user choose an item from a list | Deixe o usuário escolher um item de uma lista
   const index = readlineSync.keyInSelect(Data.map((item)=>{return item.Title +" link:"+ item.Link}), 'Qual site?');
-  console.log(Data[index]);
+  console.log('Site Selecionado :'+Data[index].Title +" link:"+ Data[index].Link);
+  await page.click('[href="'+Data[index].Link+'"]');
 
-  // Screenshot | Captura de tela
-  await page.screenshot({path: 'example.png', fullPage: true});
+  
+  const pagePrint = await browser.newPage();
+  await pagePrint.goto(Data[index].Link);
+  
+  const TypeExport = ['.PDF','.HTML','.PNG']
+  const ValueExport = readlineSync.keyInSelect(TypeExport, 'Qual site?');
+  
+  switch(ValueExport) {
+    case 0:
+      //Generates PDF of the page | Gera PDF da página
+      await pagePrint.pdf({path: 'output.pdf',format: 'A4',preferCSSPageSize: true,printBackground: true});
+      break;
+    case 1:
+      //Generates HTML docs from the page | Gera docs HTML da página
+      FileSystem.writeFileSync('output.html', await pagePrint.content());
+      break;
+    case 2:
+      // Screenshot | Captura de tela
+      await pagePrint.screenshot({path: 'output.png', fullPage: true});
+      break;
+  }
   
 
   await browser.close();
