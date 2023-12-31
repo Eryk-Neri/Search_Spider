@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const readlineSync = require('readline-sync');
-const FileSystem = require('fs');
 
 (async () => {
   // Launch the browser and open a new blank page | Inicie o navegador e abra uma nova página em branco
@@ -39,9 +38,11 @@ const FileSystem = require('fs');
 
   const Data = await page.evaluate(()=>{
     
+    //Gets all linked elements from the page | Pega todos os elementos com link da página
     let allElments = document.querySelectorAll('[jscontroller=SC7lYd]');
     arr = [];
 
+    //extracts the title and link of each element found | extrai o titulo e o link de cada elemento encontrado
     allElments.forEach(item =>{
       let TitleSite = item.querySelector('.yuRUbf a h3');
       let URLSite = item.querySelector('.yuRUbf a');
@@ -56,32 +57,15 @@ const FileSystem = require('fs');
   });
 
   //Let the user choose an item from a list | Deixe o usuário escolher um item de uma lista
-  const index = readlineSync.keyInSelect(Data.map((item)=>{return item.Title +" link:"+ item.Link}), 'Qual site?');
-  console.log('Site Selecionado :'+Data[index].Title +" link:"+ Data[index].Link);
-  await page.click('[href="'+Data[index].Link+'"]');
+  const index = readlineSync.keyInSelect(Data.map((item)=>{return item.Title +" link: "+ item.Link}), 'Qual site?');
+  console.log('Site Selecionado: '+Data[index].Title +" link:"+ Data[index].Link);
 
-  
-  const pagePrint = await browser.newPage();
-  await pagePrint.goto(Data[index].Link);
-  
-  const TypeExport = ['.PDF','.HTML','.PNG']
-  const ValueExport = readlineSync.keyInSelect(TypeExport, 'Qual site?');
-  
-  switch(ValueExport) {
-    case 0:
-      //Generates PDF of the page | Gera PDF da página
-      await pagePrint.pdf({path: 'output.pdf',format: 'A4',preferCSSPageSize: true,printBackground: true});
-      break;
-    case 1:
-      //Generates HTML docs from the page | Gera docs HTML da página
-      FileSystem.writeFileSync('output.html', await pagePrint.content());
-      break;
-    case 2:
-      // Screenshot | Captura de tela
-      await pagePrint.screenshot({path: 'output.png', fullPage: true});
-      break;
-  }
-  
+  //open the selected link and wait for the page to load | abra o link selecionado e espere a página carregar
+  await page.goto(Data[index].Link, { waitUntil: 'domcontentloaded' });
 
+  // Screenshot | Captura de tela
+  await page.screenshot({path: 'output.png', fullPage: true});  
+
+  //close the browser | feche o navegador
   await browser.close();
 })();
