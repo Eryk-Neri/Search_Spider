@@ -21,19 +21,13 @@ const readlineSync = require('readline-sync');
     //Searches for element within 5000 milliseconds (1 seconds) | Procura elemnto dentro de 1000 milissegundos (1 segundos)
     const element = await page.waitForSelector('#fprsl', { timeout: 1000 });
     
-    do{  
-      const Correcao = readlineSync.question('Deseja corrigir a sua pesquisa para "'+ await element?.evaluate(el => el.innerText) + '"? [S] [N] ');
+    const Correcao = readlineSync.keyInYN('Deseja corrigir a sua pesquisa para "'+ await element?.evaluate(el => el.innerText) + '"?');
       Verificacao = (Correcao.toUpperCase()=='S'||Correcao.toUpperCase()=='N');
 
-      if(Correcao.toUpperCase()=='S'){
+      if(Correcao){
         await page.click('#fprsl');
-      }else if(Correcao.toUpperCase()!='N'){
-        console.log('Opção invalida')
       }
-      
-    }while(!Verificacao);
   } catch (error) {
-    console.error('Elemento não encontrado:', error);
   }
 
   const Data = await page.evaluate(()=>{
