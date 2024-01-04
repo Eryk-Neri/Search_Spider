@@ -2,28 +2,28 @@
 
 > EN-US
 
-> Search Spider is a **[Node.js](https://nodejs.org/en)** project that uses **[Puppeteer](https://pptr.dev)** and **[Readline-sync](https://www.npmjs.com/package/readline-sync)** to allow users to perform web searches and take screenshots of selected web pages.
+Search Spider is a **[Node.js](https://nodejs.org/en)** project that uses **[Puppeteer](https://pptr.dev)** and **[Readline-sync](https://www.npmjs.com/package/readline-sync)** to allow users to perform web searches and take screenshots of selected web pages.
 
 > PT-BR
 
-> O Search Spider é um projeto em **[Node.js](https://nodejs.org/en)** que utiliza **[Puppeteer](https://pptr.dev)** e **[Readline-sync](https://www.npmjs.com/package/readline-sync)**  para permitir aos usuários realizar buscas na web e obter screenshots de páginas da web selecionadas.
+O Search Spider é um projeto em **[Node.js](https://nodejs.org/en)** que utiliza **[Puppeteer](https://pptr.dev)** e **[Readline-sync](https://www.npmjs.com/package/readline-sync)**  para permitir aos usuários realizar buscas na web e obter screenshots de páginas da web selecionadas.
 
 ### 📋 Prerequisites | Pré-requisitos
 
 > EN-US
 
-> Have **[Node.js](https://nodejs.org/en)** downloaded on your machine
+Have **[Node.js](https://nodejs.org/en)** downloaded on your machine
 
 > PT-BR
 
-> Tenha o **[Node.js](https://nodejs.org/en)** abaixado na sua maquina
+Tenha o **[Node.js](https://nodejs.org/en)** abaixado na sua maquina
 
 
 ## 🚀 Starting | Começando
 
 > EN-US
 
-> After downloading **[Node.js](https://nodejs.org/en)** on your machine, make a git clone of the project
+After downloading **[Node.js](https://nodejs.org/en)** on your machine, make a git clone of the project
 
 - Open Git Bash.
 - Change the current working directory to the location where you want to have the directory cloned.
@@ -35,7 +35,7 @@ git clone https://github.com/Eryk-Neri/Search_Spider.git
 
 > PT-BR
 
->Após baixar o **[Node.js](https://nodejs.org/en)** em sua máquina, faça um clone git do projeto
+Após baixar o **[Node.js](https://nodejs.org/en)** em sua máquina, faça um clone git do projeto
 
 - Abra Git Bash.
 
@@ -52,13 +52,13 @@ git clone https://github.com/Eryk-Neri/Search_Spider.git
 
 > EN-US
 
-> After doing git clone, with the terminal open, run index.js
+After doing git clone, with the terminal open, run index.js
 
 ```Terminal
 Node index.js
 ```
 
-> Soon after, the program will ask what the Search will be
+Soon after, the program will ask what the Search will be
 
 ```Terminal
 Pesquisa:
@@ -82,13 +82,13 @@ After selecting one of the options, the program will save a complete print of th
 
 > PT-BR
 
-> Após ter feito git clone, com o terminal aberto, execute index.js
+Após ter feito git clone, com o terminal aberto, execute index.js
 
 ```Terminal
 Node index.js
 ```
 
-> Logo em seguida o programa ira perguntar qual sera a Pesquisa
+Logo em seguida o programa ira perguntar qual sera a Pesquisa
 
 ```Terminal
 Pesquisa:
